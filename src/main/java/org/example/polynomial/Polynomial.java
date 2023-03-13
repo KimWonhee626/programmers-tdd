@@ -9,30 +9,33 @@ public class Polynomial {
 
     public static int calc(String exp) {
         boolean needToMulti = exp.contains("*");
-        boolean needToPlus = !needToMulti;
+        boolean needToPlus = exp.contains("+");
+        boolean needToCompound = needToMulti && needToPlus;
 
-        if (needToPlus) {
+        if (needToCompound) {
+            String[] bits = exp.split(" \\+ ");
+
+            return Integer.parseInt(bits[0]) + calc(bits[1]);
+        }
+        else if (needToPlus) {
             exp = exp.replaceAll("- ", "+ -");
 
             String[] bits = exp.split(" \\+ ");
             int sum = 0;
-
             for (int i = 0; i < bits.length; i++) {
                 sum += Integer.parseInt(bits[i]);
             }
-
             return sum;
-        } else if (needToMulti) {
+        }
+        else if (needToMulti) {
             String[] bits = exp.split(" \\* ");
-
             int sum = 1;
-
             for (int i = 0; i < bits.length; i++) {
                 sum *= Integer.parseInt(bits[i]);
             }
-
             return sum;
         }
+
         throw new RuntimeException("올바른 계산식이 아닙니다.");
     }
 }

@@ -36,10 +36,18 @@ public class PolynomialTests {
     public void t5() {
         assertThat(Polynomial.calc("10 * -10")).isEqualTo(-100);
     }
+
     @Test
     @DisplayName("10 * 20 * 30 == 6000")
     public void t6() {
         assertThat(Polynomial.calc("10 * 20 * 30")).isEqualTo(6000);
     }
+
+    @Test
+    @DisplayName("10 + 5 * 2 == 20")
+    public void t7() {
+        assertThat(Polynomial.calc("10 + 5 * 2")).isEqualTo(20);
+    }
+
 
 }
