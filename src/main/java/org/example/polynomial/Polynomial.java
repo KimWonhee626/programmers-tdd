@@ -3,29 +3,36 @@ package org.example.polynomial;
 import java.util.Stack;
 
 public class Polynomial {
-    String input;
-    Stack<Integer> intStack;
-
-    public Polynomial(String input) {
-        this.input = input;
-        this.intStack = new Stack<Integer>();
+    public Polynomial(String exp) {
 
     }
 
     public static int calc(String exp) {
-        int result = 0;
+        boolean needToMulti = exp.contains("*");
+        boolean needToPlus = !needToMulti;
 
-        String[] bits = exp.split(" ");
+        if (needToPlus) {
+            exp = exp.replaceAll("- ", "+ -");
 
-        int a = Integer.parseInt(bits[0]);
-        int b = Integer.parseInt(bits[2]);
-        String op = bits[1];
+            String[] bits = exp.split(" \\+ ");
+            int sum = 0;
 
-        if (op.equals("+"))
-            result = a + b;
-        else if (op.equals("-"))
-            result = a - b;
-        return result;
+            for (int i = 0; i < bits.length; i++) {
+                sum += Integer.parseInt(bits[i]);
+            }
+
+            return sum;
+        } else if (needToMulti) {
+            String[] bits = exp.split(" \\* ");
+
+            int sum = 1;
+
+            for (int i = 0; i < bits.length; i++) {
+                sum *= Integer.parseInt(bits[i]);
+            }
+
+            return sum;
+        }
+        throw new RuntimeException("올바른 계산식이 아닙니다.");
     }
-
 }
