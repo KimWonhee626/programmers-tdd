@@ -79,4 +79,15 @@ public class PolynomialTests {
         assertThat(Polynomial.calc("(10 + 20)")).isEqualTo(30);
     }
 
+    @Test
+    @DisplayName("((10 + 20)) == 30")
+    void t13() {
+        assertThat(Polynomial.calc("((10 + 20))")).isEqualTo(30);
+    }
+
+    @Test
+    @DisplayName("(((10 + 20))) == 30")
+    void t14() {
+        assertThat(Polynomial.calc("(((10 + 20)))")).isEqualTo(30);
+    }
 }

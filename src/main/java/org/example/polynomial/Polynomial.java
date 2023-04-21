@@ -9,6 +9,7 @@ public class Polynomial {
     }
 
     public static int calc(String exp) {
+        exp = stripOuterBrackets(exp);
 
         // 매개변수에 단일항이 들어오면 그대로 리턴
         if (!(exp.contains(" "))) {
@@ -54,4 +55,18 @@ public class Polynomial {
 
         throw new RuntimeException("올바른 계산식이 아닙니다.");
     }
+
+    private static String stripOuterBrackets(String exp) {
+
+        int outerBracketsCount = 0;
+
+        while (exp.charAt(outerBracketsCount) == '(' && exp.charAt(exp.length() - 1 - outerBracketsCount) == ')') {
+            outerBracketsCount++;
+        }
+
+        if (outerBracketsCount == 0) return exp;
+
+        return exp.substring(outerBracketsCount, exp.length() - outerBracketsCount);
+    }
+
 }
