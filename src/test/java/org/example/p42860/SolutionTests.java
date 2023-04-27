@@ -16,7 +16,7 @@ public class SolutionTests {
                         1
                 );
         }
-        
+
         @Test
         @DisplayName("CAA → 2")
         void t02() {
@@ -27,6 +27,44 @@ public class SolutionTests {
                 );
         }
 
+        @Test
+        @DisplayName("JEROEN -> 56")
+        void t03() {
+                assertThat(
+                        new Solution().solution("JEROEN")
+                ).isEqualTo(
+                        56
+                );
+        }
 
+        @Test
+        @DisplayName("AAAAA → 0")
+        void t4() {
+                assertThat(
+                        new Solution().solution("AAAAA")
+                ).isEqualTo(
+                        0
+                );
+        }
+
+        @Test
+        @DisplayName("ADAAAABCDKK -> 7")
+        void t05() {
+                assertThat(
+                        new Solution().solution("ADAAAABCDKK")
+                ).isEqualTo(
+                        7
+                );
+        }
+
+        @Test
+        @DisplayName("B -> 1")
+        void t06() {
+                assertThat(
+                        new Solution().solution("B")
+                ).isEqualTo(
+                        1
+                );
+        }
 
 }

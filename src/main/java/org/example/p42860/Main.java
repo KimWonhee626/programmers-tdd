@@ -5,39 +5,25 @@ public class Main {
 
 class Solution{
     public int solution(String name) {
-        return moveCount(name) + nameCount(name);
-    }
+        int answer = 0;
+        int moveCount = name.length() - 1; //좌우 이동의 최대횟수
+        int len = name.length();
 
-    // 위/아래
-    private int nameCount(String name){
-        int nameCount = 0;
-
-        for (int i = 0; i < name.length(); i++) {
+        for (int i = 0; i < len; i++) {
+            // 위아래
             char c = name.charAt(i);
+            answer += Math.min(c - 'A', 'Z' - c + 1);
 
-            int diff = c - 'A';
-
-            nameCount += diff;
-        }
-
-        return nameCount;
-    }
-
-    // 좌/우
-    private int moveCount(String name){
-        int moveCount = 0;
-
-        for (int i = 0; i < name.length(); i++) {
-            char c = name.charAt(i);
-
-            int diff = c - 'A';
-
-            if (diff > 0) {
-                moveCount = i;
+            // 좌우
+            // 다음 요소 부터 연속된 A 탐색
+            int indexA = i + 1;
+            while (indexA < len && name.charAt(indexA) == 'A') {
+                indexA++;
             }
+            // i+i > 연속된 A 시작하기 전까지 갔다가 되돌아옴
+            moveCount = Math.min(moveCount, i + (len - indexA) + Math.min(i, len-moveCount));
         }
 
-        return moveCount;
+        return answer + moveCount;
     }
-
 }
